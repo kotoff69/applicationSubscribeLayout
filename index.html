@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Loop 1 - Step 1</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="cards-container">
+      <div class="card">
+        <div class="image"><img src="img/device.svg"></div>
+        <div class="header">Mobile</div>
+        <div class="description">Get notification about new releases in our mobile app.</div>
+        <div class="price"><sup class="currency">$</sup>10<span class="period">/month</span></div>
+      </div>
+      <div class="card">
+        <div class="image"><img src="img/laptop.svg"></div>
+        <div class="header">DESKTOP</div>
+        <div class="description">Enjoy new episodes on your laptop in browser with our web service, which supports all the platforms.</div>
+        <div class="price"><sup class="currency">$</sup>15<span class="period">/month</span></div>
+      </div>
+      <div class="card">
+        <div class="image"><img src="img/monitor.svg"></div>
+        <div class="header">TV</div>
+        <div class="description">Watch your favorite series at hone on large screen with our TV application.</div>
+        <div class="price"><sup class="currency">$</sup>20<span class="period">/month</span></div>
+      </div>
+      <div class="button-container"><button class="button blue">Give feedback</button></div>
+    </div>
+  </div>
+  <div id="popup" class="popup" style="display: none;">
+    <div class="content">
+      <div id="close" class="close"></div>
+      <div class="popup-header">Confirmation</div>
+      <div id="template" class="template">
+      </div>
+      <div class="button-container"><button class="button blue">Confirm and pay</button></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+      let cards = document.getElementsByClassName('card');
+      let closeButton = document.getElementById('close');
+      let popup = document.getElementById('popup');
+
+      let listeners = Array.from(cards);
+      listeners.push(closeButton, popup);
+
+      function togglePopup(event) {
+          let popup = document.getElementById('popup');
+          let template = document.getElementById('template');
+
+          // Close popup on outside click only
+          if (this.id == 'popup' && event.target.id != 'popup') {
+              return;
+          }
+
+          if (popup.style.display === 'block') {
+              popup.style.display = 'none';
+              template.innerHTML = '';
+              template.classList.remove('card');
+          } else {
+              popup.style.display = 'block';
+              template.classList.add('card');
+              template.innerHTML = this.innerHTML;
+          }
+      }
+
+      listeners.forEach(function(element) {
+          element.addEventListener('click', togglePopup);
+      });
+  </script>
+</body>
+</html>
